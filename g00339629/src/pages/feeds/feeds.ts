@@ -12,7 +12,8 @@ export class FeedsPage {
     feed = {}
     items:any[] = []
 
-    url = 'http://epidemz.co/filmy/rss.xml'
+    url = 'http://epidemz.co/serial/rss.xml'
+    // url = 'http://epidemz.co/filmy/rss.xml'
     // url = 'http://feeds.reuters.com/reuters/technologyNews'
 
 
