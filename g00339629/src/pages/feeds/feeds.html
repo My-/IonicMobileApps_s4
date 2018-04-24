@@ -14,5 +14,10 @@
 
 
 <ion-content padding>
-
+    <ion-card *ngFor="let item of items">
+        <H3>{{item.title}}</H3>
+        <p>
+            {{item.pubDate}}
+        </p>
+    </ion-card>
 </ion-content>
