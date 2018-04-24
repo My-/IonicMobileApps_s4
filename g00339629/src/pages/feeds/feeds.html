@@ -14,10 +14,24 @@
 
 
 <ion-content padding>
+    <p>{{status}}</p>
+    <h2>{{feed.title}}</h2>
+
     <ion-card *ngFor="let item of items">
-        <H3>{{item.title}}</H3>
-        <p>
+        <img src={{item.thumbnail}} />
+
+        <ion-card-content>
+            <ion-card-title>{{cleanTitle(item.title)}}</ion-card-title>
+        </ion-card-content>
+
+        <ion-item>
+            <ion-icon name='time' item-start style="color: #79745d"></ion-icon>
             {{item.pubDate}}
-        </p>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name='ios-thermometer-outline' item-start style="color: #79745d"></ion-icon>
+            {{getRating(item.content)}}
+        </ion-item>
     </ion-card>
 </ion-content>
