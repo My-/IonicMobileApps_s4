@@ -15,4 +15,9 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
   }
 
+  navigateToCountingGamePage = () => console.log('todo counting game')
+  navigateToFeedsPage = () => this.navCtrl.push('FeedsPage')
+  toggleLight = () => console.log('todo tougle light')
+  navigateToWeatherPage = () => console.log('todo weather')
+
 }
