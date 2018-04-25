@@ -62,13 +62,15 @@
     <ion-list>
         <ion-item-sliding *ngFor="let item of items">
 
-            <ion-item >
-                <ion-thumbnail item-start>
+            <ion-item (click)="itemClicked(item)">
+                <ion-thumbnail item-start >
                     <img src={{item.thumbnail}} />
                 </ion-thumbnail>
 
                 <h2>{{cleanTitle(item.title)}}</h2>
                 <p>{{item.pubDate}}</p>
+                <p *ngIf="getRating(item.content) > 0">IMDB: {{getRating(item.content)}}</p>
+
             </ion-item>
 
             <ion-item-options side="left">

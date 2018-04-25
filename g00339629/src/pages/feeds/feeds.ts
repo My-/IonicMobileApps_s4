@@ -20,9 +20,9 @@ export class FeedsPage {
     feed = {}
     items:any[] = []
 
-    url = 'http://epidemz.co/muzyka/rss.xml'
+    // url = 'http://epidemz.co/muzyka/rss.xml'
     // url = 'http://epidemz.co/serial/rss.xml'
-    // url = 'http://epidemz.co/filmy/rss.xml'
+    url = 'http://epidemz.co/filmy/rss.xml'
     // url = 'http://feeds.reuters.com/reuters/technologyNews'
 
 
@@ -130,5 +130,10 @@ export class FeedsPage {
     *   Search for feed
     */
     search = () => console.log('todo')
+
+    /**
+    *
+    */
+    itemClicked = (item) => console.log(`item ${item} clicked`)
 
 }
