@@ -1,13 +1,10 @@
-// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class HelperFunctionProvider {
+export class ViewActionProvider {
 
-    constructor(
-        // public http: HttpClient
-    ){
-        console.log('Hello HelperFunctionProvider Provider');
+    constructor() {
+        console.log('Hello ViewActionProvider Provider');
     }
 
     /**

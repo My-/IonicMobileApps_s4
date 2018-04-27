@@ -33,73 +33,17 @@
     <!-- <p>{{status}}</p>
     <h4>{{feed.title}}</h4> -->
 
-    <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content> -->
-
-            <!-- <ion-card *ngFor="let item of items">
-                <img src={{item.thumbnail}} />
-
-                <ion-card-content>
-                    <ion-card-title>{{cleanTitle(item.title)}}</ion-card-title>
-                </ion-card-content>
-
-                <ion-item>
-                    <ion-icon name='time' item-start style="color: #79745d"></ion-icon>
-                    {{item.pubDate}}
-                </ion-item>
-
-                <ion-item *ngIf="getRating(item.content) > 0">
-                    <ion-icon name='ios-thermometer-outline' item-start style="color: #79745d"></ion-icon>
-                    {{getRating(item.content)}}
-                </ion-item>
+    <card-view [items]='items'></card-view>
+    <thumbnail-view [items]='items'></thumbnail-view>
 
 
-            </ion-card> -->
-
-        <card-view [items]='items'></card-view>
-
-
-            <ion-refresher (ionRefresh)="doRefresh($event)">
-                <ion-refresher-content
-                      pullingIcon="arrow-dropdown"
-                      pullingText="Pull to refresh"
-                      refreshingSpinner="circles"
-                      refreshingText="Refreshing...">
-                </ion-refresher-content>
-            </ion-refresher>
-
-            <!-- <ion-list> -->
-        <!-- <ion-item-sliding *ngFor="let item of items">
-
-                <ion-item (click)="itemClicked(item)">
-                    <ion-thumbnail item-start >
-                        <img src={{item.thumbnail}} />
-                    </ion-thumbnail>
-
-                    <h2>{{cleanTitle(item.title)}}</h2>
-                    <p>{{item.pubDate}}</p>
-                    <p *ngIf="getRating(item.content) > 0">IMDB: {{getRating(item.content)}}</p>
-
-                </ion-item>
-
-                <ion-item-options side="left">
-                    <button ion-button color="danger" (click)="removeFeed(item)">
-                        <ion-icon name="trash"></ion-icon>
-                        Remove
-                    </button>
-                </ion-item-options>
-                <ion-item-options side="right">
-                    <button ion-button color="secondary">
-                        <ion-icon name="folder"></ion-icon>
-                        Save
-                    </button>
-                    <button ion-button color="primary">
-                        <ion-icon name="share"></ion-icon>
-                        Share
-                    </button>
-                </ion-item-options>
-            </ion-item-sliding>
-
-        </ion-list> -->
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+              pullingIcon="arrow-dropdown"
+              pullingText="Pull to refresh"
+              refreshingSpinner="circles"
+              refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
 
 </ion-content>

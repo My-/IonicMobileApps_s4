@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HelperFunctionProvider } from '../../providers/helper-function/helper-function';
+import { ViewActionProvider } from '../../providers/view-action/view-action';
 
 
 
@@ -14,7 +14,7 @@ export class CardViewComponent {
     // text: string;
 
     constructor(
-        private helper:HelperFunctionProvider
+        private view:ViewActionProvider
     ){
         console.log('Hello CardViewComponent Component');
         // this.text = 'CardViewComponent';

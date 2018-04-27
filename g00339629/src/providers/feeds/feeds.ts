@@ -27,13 +27,6 @@ export class FeedsProvider {
         console.log('Hello FeedsProvider Provider');
     }
 
-    // getFeed = (link:string):Observable<any> =>
-    //         Feed.load(link, (err, rss)=>{
-    //                 console.log(rss)
-    //                 console.log(err)
-    //                 return rss.map(it => it)
-    //         })
-
     // https://stackoverflow.com/a/332888/5322506
     getFeed = (rssURL:string):Observable<any> =>
             this.http.get(`${this.apiURL}?${this.apiKey}&${this.rss}${encodeURIComponent(rssURL)}`
