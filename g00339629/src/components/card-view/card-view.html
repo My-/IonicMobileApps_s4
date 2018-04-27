@@ -1,0 +1,21 @@
+
+<ion-card *ngFor="let item of items">
+
+    <img src={{item.thumbnail}} />
+
+    <ion-card-content>
+        <ion-card-title>{{cleanTitle(item.title)}}</ion-card-title>
+    </ion-card-content>
+
+    <ion-item>
+        <ion-icon name='time' item-start style="color: #79745d"></ion-icon>
+        {{item.pubDate}}
+    </ion-item>
+
+    <ion-item *ngIf="getRating(item.content) > 0">
+        <ion-icon name='ios-thermometer-outline' item-start style="color: #79745d"></ion-icon>
+        {{getRating(item.content)}}
+    </ion-item>
+
+
+</ion-card>

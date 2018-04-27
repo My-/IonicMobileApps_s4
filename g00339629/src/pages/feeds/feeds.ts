@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FeedsProvider } from '../../providers/feeds/feeds'
 
 import { PopoverController } from 'ionic-angular';
-import { FeedPopoverPage } from '../feed-popover/feed-popover';
+// import { FeedPopoverPage } from '../feed-popover/feed-popover';
 // import { FeedPopoverPageModule } from '../feed-popover/feed-popover.module';
 
 
@@ -20,6 +20,7 @@ export class FeedsPage {
     feed = {}
     items:any[] = []
 
+    // url = 'http://feeds.bbci.co.uk/news/world/europe/rss.xml'
     // url = 'http://epidemz.co/muzyka/rss.xml'
     // url = 'http://epidemz.co/serial/rss.xml'
     url = 'http://epidemz.co/filmy/rss.xml'
@@ -38,17 +39,7 @@ export class FeedsPage {
     */
     ionViewDidLoad() {
       console.log('ionViewDidLoad FeedsPage');
-      // this.loadFeeds()
-      this.fp.getFeed(this.url)
-            .subscribe(data=> {
-                console.log(encodeURIComponent(this.url))
-
-                if( data.status === 'ok'){
-                    this.status = true
-                    this.feed = data.feed
-                    this.items = data.items
-                }
-            })
+      this.loadFeeds()
     }
 
     /**
@@ -106,7 +97,15 @@ export class FeedsPage {
     /**
     *   refresh content
     */
-    doRefresh = (ev: UIEvent) => console.log('todo')
+    doRefresh = (refresher:any) =>{
+        console.log('Begin async operation', refresher);
+        // refresher.complete();
+
+        setTimeout(() => {
+              console.log('Async operation has ended');
+              refresher.complete();
+        }, 500);
+    }
 
     /**
     *   Deletes feed from array
@@ -117,13 +116,10 @@ export class FeedsPage {
     /**
     *   More menu popover
     */
-    moreMenu = (ev: UIEvent) => {
-        let popover = this.popoverCtrl.create(FeedPopoverPage, {
-            // contentEle: this.content.nativeElement,
-            // textEle: this.text.nativeElement
-        })
-
-        popover.present({ev: ev})
+    moreMenu = (event: UIEvent) => {
+        let popover = this.popoverCtrl.create('FeedPopoverPage')
+        console.log('popover event', event)
+        popover.present({ev: event})
     }
 
     /**

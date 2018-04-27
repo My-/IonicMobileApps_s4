@@ -56,40 +56,50 @@
 
             </ion-card> -->
 
-        <!-- </ion-refresher-content>
-    </ion-refresher> -->
+        <card-view [items]='items'></card-view>
 
-    <ion-list>
-        <ion-item-sliding *ngFor="let item of items">
+        <!-- <ion-list>
 
-            <ion-item (click)="itemClicked(item)">
-                <ion-thumbnail item-start >
-                    <img src={{item.thumbnail}} />
-                </ion-thumbnail>
+            <ion-refresher (ionRefresh)="doRefresh($event)">
+                <ion-refresher-content
+                      pullingIcon="arrow-dropdown"
+                      pullingText="Pull to refresh"
+                      refreshingSpinner="circles"
+                      refreshingText="Refreshing...">
+                </ion-refresher-content>
+            </ion-refresher>
 
-                <h2>{{cleanTitle(item.title)}}</h2>
-                <p>{{item.pubDate}}</p>
-                <p *ngIf="getRating(item.content) > 0">IMDB: {{getRating(item.content)}}</p>
+            <ion-item-sliding *ngFor="let item of items">
 
-            </ion-item>
+                <ion-item (click)="itemClicked(item)">
+                    <ion-thumbnail item-start >
+                        <img src={{item.thumbnail}} />
+                    </ion-thumbnail>
 
-            <ion-item-options side="left">
-                <button ion-button color="danger" (click)="removeFeed(item)">
-                    <ion-icon name="trash"></ion-icon>
-                    Remove
-                </button>
-            </ion-item-options>
-            <ion-item-options side="right">
-                <button ion-button color="secondary">
-                    <ion-icon name="folder"></ion-icon>
-                    Save
-                </button>
-                <button ion-button color="primary">
-                    <ion-icon name="share"></ion-icon>
-                    Share
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
+                    <h2>{{cleanTitle(item.title)}}</h2>
+                    <p>{{item.pubDate}}</p>
+                    <p *ngIf="getRating(item.content) > 0">IMDB: {{getRating(item.content)}}</p>
+
+                </ion-item>
+
+                <ion-item-options side="left">
+                    <button ion-button color="danger" (click)="removeFeed(item)">
+                        <ion-icon name="trash"></ion-icon>
+                        Remove
+                    </button>
+                </ion-item-options>
+                <ion-item-options side="right">
+                    <button ion-button color="secondary">
+                        <ion-icon name="folder"></ion-icon>
+                        Save
+                    </button>
+                    <button ion-button color="primary">
+                        <ion-icon name="share"></ion-icon>
+                        Share
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+
+        </ion-list> -->
 
 </ion-content>

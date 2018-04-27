@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 // https://stackoverflow.com/questions/44377230/using-javascript-in-ionic-2
 // https://www.npmjs.com/package/rss-to-json
-import * as Feed from  'rss-to-json'
+// import * as Feed from  'rss-to-json'
 
 
 @Injectable()
@@ -38,6 +38,6 @@ export class FeedsProvider {
     getFeed = (rssURL:string):Observable<any> =>
             this.http.get(`${this.apiURL}?${this.apiKey}&${this.rss}${encodeURIComponent(rssURL)}`
             +`&${this.count}13`)
-                    .map(it => it)
+                    // .map(it => it)
 
 }
