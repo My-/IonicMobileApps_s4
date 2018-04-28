@@ -29,14 +29,13 @@
 </ion-header>
 
 
-<ion-content padding>
-    <!-- <p>{{status}}</p>
-    <h4>{{feed.title}}</h4> -->
+<ion-content padding >
 
-    <card-view [items]='items'></card-view>
-    <thumbnail-view [items]='items'></thumbnail-view>
+    <!-- Views -->
+    <card-view *ngIf="view === 'Cards'" [items]='items'></card-view>
+    <thumbnail-view *ngIf="view === 'Thumbnails'" [items]='items'></thumbnail-view>
 
-
+    <!-- Refresh functionality -->
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content
               pullingIcon="arrow-dropdown"

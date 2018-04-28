@@ -1,37 +1,54 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
 import { FeedsProvider } from '../../providers/feeds/feeds'
 
-import { PopoverController } from 'ionic-angular';
 // import { FeedPopoverPage } from '../feed-popover/feed-popover';
 // import { FeedPopoverPageModule } from '../feed-popover/feed-popover.module';
 
 
 @IonicPage()
 @Component({
-  selector: 'page-feeds',
-  templateUrl: 'feeds.html',
+    selector: 'page-feeds',
+    templateUrl: 'feeds.html',
 })
 export class FeedsPage {
     // @ViewChild('popoverContent', {read: ElementRef}) content: ElementRef;
     // @ViewChild('popoverText', {read: ElementRef}) text: ElementRef;
 
+    // RSS status
     status:boolean = false
     feed = {}
     items:any[] = []
 
-    // url = 'http://feeds.bbci.co.uk/news/world/europe/rss.xml'
-    // url = 'http://epidemz.co/muzyka/rss.xml'
-    // url = 'http://epidemz.co/serial/rss.xml'
-    url = 'http://epidemz.co/filmy/rss.xml'
-    // url = 'http://feeds.reuters.com/reuters/technologyNews'
+    /**
+    *    url for testing
+    */
+    url =[
+        'http://epidemz.co/filmy/rss.xml'
+        , 'http://epidemz.co/serial/rss.xml'
+        , 'http://epidemz.co/muzyka/rss.xml'
+        , 'http://feeds.bbci.co.uk/news/world/europe/rss.xml'
+        , 'http://feeds.reuters.com/reuters/technologyNews'
+    ]
 
+    /**
+    *   If true: card view is displayed
+    */
+    view:string
 
-    constructor(public navCtrl: NavController
+    constructor(
+            public navCtrl: NavController
             , public navParams: NavParams
             , private fp:FeedsProvider
             , public popoverCtrl: PopoverController
-        ){
+            , private storage: Storage
+    ){
+        this.storage.get('viewType')
+                .then(it => this.view = it)
+                .catch(err=> console.error(err))
+                .then(it => console.log('in Feeds: '+ this.view))
     }
 
     /**
@@ -46,9 +63,9 @@ export class FeedsPage {
     *   load feeds
     */
     loadFeeds = () =>
-            this.fp.getFeed(this.url)
+            this.fp.getFeed(this.url[0])
                         .subscribe(data=> {
-                            console.log(encodeURIComponent(this.url))
+                            console.log(encodeURIComponent(this.url[0]))
 
                             if( data.status === 'ok'){
                                 this.status = true
