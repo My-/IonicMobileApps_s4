@@ -32,8 +32,10 @@
 <ion-content padding >
 
     <!-- Views -->
-    <card-view *ngIf="view === 'Cards'" [items]='items'></card-view>
-    <thumbnail-view *ngIf="view === 'Thumbnails'" [items]='items'></thumbnail-view>
+    <div [ngSwitch]="view">
+        <card-view *ngSwitchCase="'Cards'" [items]='items'></card-view>
+        <thumbnail-view *ngSwitchCase="'Thumbnails'" [items]='items'></thumbnail-view>
+    </div>
 
     <!-- Refresh functionality -->
     <ion-refresher (ionRefresh)="doRefresh($event)">
