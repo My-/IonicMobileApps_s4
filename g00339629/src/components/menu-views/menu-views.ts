@@ -2,36 +2,23 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 @Component({
-  selector: 'feed-menu-more'
-  , templateUrl: 'feed-menu-more.html'
-  , inputs: ['viewType']
+    selector: 'menu-views'
+    , templateUrl: 'menu-views.html'
+    , inputs: ['viewType']
 })
-export class FeedMenuMoreComponent {
+export class MenuViewsComponent {
 
-    text: string
     viewType:string
 
     constructor(
         private storage:Storage
     ) {
-        console.log('Hello FeedMenuMoreComponent Component');
-        this.text = 'Hello World';
+        console.log('Hello MenuViewsComponent Component');
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad FeedMenuMoreComponent');
+        console.log('ionViewDidLoad MenuViewsComponent');
     }
-
-    // ionViewWillEnter = () => {
-    //     console.log('ionViewWillEnter() @ FeedMenuMoreComponent')
-    //
-    //     this.storage.get('viewType')
-    //             .then(it => this.viewType = it)
-    //             .catch(err => console.error(err))
-    //             .then(it => console.log('got: '+ this.viewType))
-    // }
-
-
 
     changeview = () => {
         let view:string
@@ -47,6 +34,5 @@ export class FeedMenuMoreComponent {
                 )
         // console.log('changeview(): '+ view +', viewType: '+ this.viewType)
     }
-
 
 }
