@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { IonicPage, PopoverController } from 'ionic-angular';
+
+import { File } from '@ionic-native/file';
 
 import { FeedsProvider } from '../../providers/feeds/feeds'
-
-// import { FeedPopoverPage } from '../feed-popover/feed-popover';
-// import { FeedPopoverPageModule } from '../feed-popover/feed-popover.module';
+import { ViewActionProvider } from '../../providers/view-action/view-action';
+import { ViewTypeProvider } from '../../providers/view-type/view-type';
 
 
 @IonicPage()
@@ -33,29 +33,47 @@ export class FeedsPage {
         , 'http://feeds.reuters.com/reuters/technologyNews'
     ]
 
+    rss = this.url[0]
+
     /**
     *   If true: card view is displayed
     */
-    view:string
+    // view:string
 
     constructor(
-            public navCtrl: NavController
-            , public navParams: NavParams
-            , private fp:FeedsProvider
+            private fp:FeedsProvider
+            , private view: ViewTypeProvider
             , public popoverCtrl: PopoverController
-            , private storage: Storage
+            , private file: File
     ){
-        this.storage.get('viewType')
-                .then(it => this.view = it)
-                .catch(err=> console.error(err))
-                .then(it => console.log('in Feeds: '+ this.view))
+        // this.storage.get('viewType')
+        //         .then(it => this.view.viewType = it)
+        //         .catch(err => this.view.viewType = 'Thumbnails')
+        //         .then(it => console.log('in Feeds: '+ this.view.viewType))
+
+        // this.file.checkDir(this.file.dataDirectory, 'mydir')
+        //         .then(_ => console.log('Directory exists'))
+        //         .catch(err => console.log("Directory doesn't exist: "+ err))
+        //
+
+        // this.file.createDir(this.file.cacheDirectory, 'MyDir', true)
+        //         .then( it => console.log('created: '+ it))
+        //         .catch(err => console.log("Directory cant be created: "+ err))
+
+        // this.file.listDir(this.file.applicationDirectory, 'src')
+        //         .then( (files) => {
+        //             console.log(files)
+        //         })
+        //         .catch( (err) => {
+        //             console.log("Directory doesn't exist: "+ err)
+        //         });
     }
 
     /**
     *     function fires then page is loaded
     */
     ionViewDidLoad() {
-      console.log('ionViewDidLoad FeedsPage');
+      console.log('ionViewDidLoad @ FeedsPage');
       this.loadFeeds()
     }
 
@@ -63,9 +81,9 @@ export class FeedsPage {
     *   load feeds
     */
     loadFeeds = () =>
-            this.fp.getFeed(this.url[0])
+            this.fp.getFeed(this.rss)
                         .subscribe(data=> {
-                            console.log(encodeURIComponent(this.url[0]))
+                            console.log(encodeURIComponent(this.rss))
 
                             if( data.status === 'ok'){
                                 this.status = true
@@ -80,7 +98,8 @@ export class FeedsPage {
     */
     doRefresh = (refresher:any) =>{
         console.log('Begin async operation', refresher);
-        // refresher.complete();
+
+        this.loadFeeds()
 
         setTimeout(() => {
               console.log('Async operation has ended');
@@ -93,13 +112,27 @@ export class FeedsPage {
     */
     removeFeed = (item:any) => this.items = this.items.filter(it=> it !== item)
 
+    filterItems(ev: any) {
+        let val = ev.target.value;
+        let title:string
+
+        if (val && val.trim() !== '') {
+            this.items = this.items.filter((item) => {
+                this.fp.cleanTitle(item.title)
+                        .toLowerCase()
+                        .includes(val.toLowerCase())
+            })
+
+        }
+    }
 
     /**
     *   More menu popover
     */
     moreMenu = (event: UIEvent) => {
         let popover = this.popoverCtrl.create('FeedPopoverPage')
-        console.log('popover event', event)
+        // console.log('popover event', event)
+
         popover.present({ev: event})
     }
 
@@ -112,5 +145,8 @@ export class FeedsPage {
     *
     */
     itemClicked = (item) => console.log(`item ${item} clicked`)
+
+
+
 
 }

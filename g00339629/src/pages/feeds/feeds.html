@@ -11,30 +11,39 @@
   </ion-navbar>
 
 </ion-header> -->
-
 <ion-header>
   <ion-toolbar>
+
     <ion-buttons start>
       <button ion-button icon-only color="royal" (click)="search()">
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
+
     <ion-title>{{feed.title}}</ion-title>
+
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="moreMenu($event)">
         <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
+
   </ion-toolbar>
+
+    <ion-toolbar no-border-top>
+        <ion-searchbar placeholder="Filter Items" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+    </ion-toolbar>
+
 </ion-header>
 
-
+<!-- Main content -->
 <ion-content padding >
 
     <!-- Views -->
-    <div [ngSwitch]="view">
+    <div [ngSwitch]="view.viewType">
         <card-view *ngSwitchCase="'Cards'" [items]='items'></card-view>
         <thumbnail-view *ngSwitchCase="'Thumbnails'" [items]='items'></thumbnail-view>
+        <p *ngSwitchDefault>Default: {{view.viewType}} <br />status: {{status}}</p>
     </div>
 
     <!-- Refresh functionality -->
