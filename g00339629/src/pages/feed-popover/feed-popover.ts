@@ -1,37 +1,56 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component,Input, Directive } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { ViewTypeProvider } from '../../providers/view-type/view-type';
 
 @IonicPage()
 @Component({
     selector: 'page-feed-popover',
     templateUrl: 'feed-popover.html',
 })
+// @Directive({
+//     selector: '[(rssView)]'
+// })
 export class FeedPopoverPage {
 
-    viewType:string
+    /**
+    *   View type variable. Default value is 'Thumbnails'
+    */
+    public viewType:string
 
     constructor(
         public navCtrl: NavController
         , public navParams: NavParams
         , private storage:Storage
+        , public viewCtrl: ViewController
+        , private view: ViewTypeProvider
     ) {
-
+        this.viewType = this.view.viewType
     }
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad FeedPopoverPage');
+    // ionViewDidLoad() {
+    //     console.log('ionViewDidLoad FeedPopoverPage');
+    // }
+    //
+    // ionViewWillEnter = () => {
+    //     console.log('ionViewWillEnter() @FeedPopoverPage')
+    // }
+
+    ionViewWillLeave(){
+        console.log('ionViewWillLeave() @ FeedPopoverPage')
+        this.close()
     }
 
-    ionViewWillEnter = () => {
-        console.log('ionViewWillEnter() @ FeedPopoverPage')
-
-        this.storage.get('viewType')
-                .then(it => this.viewType = it)
-                .catch(err => console.error(err))
-                .then(it => console.log('got: '+ this.viewType))
+    close(){
+        console.log('close feed-popover')
+        this.view.saveView()
     }
 
-    // TODO: do change view here & pass as parameters to fed menu component
+    setViewType(data:string){
+        this.view.viewType = data
+        console.log('received data: '+ this.view.viewType)
+    }
+
+
 
 }

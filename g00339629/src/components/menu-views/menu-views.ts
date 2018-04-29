@@ -1,38 +1,28 @@
-import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'menu-views'
     , templateUrl: 'menu-views.html'
-    , inputs: ['viewType']
 })
 export class MenuViewsComponent {
 
-    viewType:string
+    // @reference: https://www.youtube.com/watch?v=DUe8y6QVPMk
 
-    constructor(
-        private storage:Storage
-    ) {
-        console.log('Hello MenuViewsComponent Component');
-    }
+    /**
+    *   Input data
+    */
+    @Input('rssView') public viewType:string
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad MenuViewsComponent');
-    }
+    /**
+    *   Output data
+    */
+    @Output() public dataEvent:EventEmitter<string> = new EventEmitter()
 
-    changeview = () => {
-        let view:string
+    constructor(){ console.log('Hello MenuViewsComponent Component') }
 
-        this.storage.set('viewType', this.viewType)
-                .then(() =>
-
-                    this.storage.get('viewType')
-                            .then(it => view = it)
-                            .catch(err => console.error(err))
-                            .then(it => console.log('view is: '+ view))
-
-                )
-        // console.log('changeview(): '+ view +', viewType: '+ this.viewType)
-    }
+    /**
+    *   Emit data to parent
+    */
+    changeView = () => { this.dataEvent.emit(this.viewType) }
 
 }

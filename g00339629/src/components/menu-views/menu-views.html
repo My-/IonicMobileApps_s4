@@ -1,14 +1,16 @@
-<ion-list radio-group [(ngModel)]="viewType" (ionChange)="changeview()">
+<ion-list radio-group [(ngModel)]="viewType" (ionChange)="changeView()">
 
-      <ion-item >
+    <ion-label>{{viewType}}</ion-label>
+
+    <ion-item >
         <ion-label>Cards</ion-label>
         <ion-radio value="Cards"></ion-radio>
-      </ion-item>
+    </ion-item>
 
-      <ion-item >
+    <ion-item >
         <ion-label>Thumbnail</ion-label>
-        <ion-radio value="Thumbnails" checked="true"></ion-radio>
-      </ion-item>
+        <ion-radio value="Thumbnails"></ion-radio>
+    </ion-item>
 
 
-    </ion-list>
+</ion-list>
