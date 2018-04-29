@@ -19,11 +19,12 @@ export class FeedPopoverPage {
     public viewType:string
 
     constructor(
-        public navCtrl: NavController
-        , public navParams: NavParams
-        , private storage:Storage
-        , public viewCtrl: ViewController
-        , private view: ViewTypeProvider
+        // public navCtrl: NavController
+        // , public navParams: NavParams
+        // , private storage:Storage
+        // , public viewCtrl: ViewController
+        // ,
+        private view: ViewTypeProvider
     ) {
         this.viewType = this.view.viewType
     }
@@ -36,16 +37,14 @@ export class FeedPopoverPage {
     //     console.log('ionViewWillEnter() @FeedPopoverPage')
     // }
 
-    ionViewWillLeave(){
-        console.log('ionViewWillLeave() @ FeedPopoverPage')
-        this.close()
-    }
+    /**
+    *   Event fires then leaving the page
+    */
+    ionViewWillLeave = () => { this.view.saveView() }
 
-    close(){
-        console.log('close feed-popover')
-        this.view.saveView()
-    }
-
+    /**
+    *   Set view type. Data comes from child
+    */
     setViewType(data:string){
         this.view.viewType = data
         console.log('received data: '+ this.view.viewType)
