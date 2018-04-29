@@ -1,23 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-
 
 @Injectable()
 export class ViewActionProvider {
 
-    view:string
-
-    constructor(
-            private storage: Storage
-    ){
+    constructor(){
         console.log('Hello ViewActionProvider Provider');
-
-        storage.get('viewType')
-                .then(it => this.view)
-                .catch(err=> console.error(err))
-
-        console.log('view: '+ this.view)
     }
+
 
     /**
     *   cleans title
