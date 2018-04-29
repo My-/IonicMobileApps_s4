@@ -20,5 +20,4 @@ export class CardViewComponent {
         // this.text = 'CardViewComponent';
     }
 
-
 }
