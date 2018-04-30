@@ -35,7 +35,7 @@ export class ViewTypeProvider {
     */
     loadView = () => {
         this.storage.get(this.keyValue)
-                    .then(it => this.viewType = it)             // load from storage
+                    .then(it => this.viewType = it)       // load from storage
                     .catch(() => {
                         this.viewType = 'Thumbnails'      // if not in storage set as default
                         console.log('Load default: '+ this.viewType)
