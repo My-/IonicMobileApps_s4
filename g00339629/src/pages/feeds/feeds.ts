@@ -17,10 +17,10 @@ export class FeedsPage {
     // @ViewChild('popoverContent', {read: ElementRef}) content: ElementRef;
     // @ViewChild('popoverText', {read: ElementRef}) text: ElementRef;
 
-    // RSS status
-    status:boolean = false
-    feed = {}
-    items:any[] = []
+    // // RSS status
+    // status:boolean = false
+    // feed = {}
+    // items:any[] = []
 
     /**
     *    url for testing
@@ -33,7 +33,8 @@ export class FeedsPage {
         , 'http://feeds.reuters.com/reuters/technologyNews'
     ]
 
-    rss = this.url[0]
+    rssURL = this.url[0]
+    showSearchBar:boolean = false
 
     /**
     *   If true: card view is displayed
@@ -41,11 +42,13 @@ export class FeedsPage {
     // view:string
 
     constructor(
-            private fp:FeedsProvider
+            private feedProv:FeedsProvider
             , private view: ViewTypeProvider
             , public popoverCtrl: PopoverController
             , private file: File
     ){
+        console.log('hello FeedsPage');
+
         // this.storage.get('viewType')
         //         .then(it => this.view.viewType = it)
         //         .catch(err => this.view.viewType = 'Thumbnails')
@@ -54,12 +57,12 @@ export class FeedsPage {
         // this.file.checkDir(this.file.dataDirectory, 'mydir')
         //         .then(_ => console.log('Directory exists'))
         //         .catch(err => console.log("Directory doesn't exist: "+ err))
+        // //
         //
-
         // this.file.createDir(this.file.cacheDirectory, 'MyDir', true)
         //         .then( it => console.log('created: '+ it))
         //         .catch(err => console.log("Directory cant be created: "+ err))
-
+        //
         // this.file.listDir(this.file.applicationDirectory, 'src')
         //         .then( (files) => {
         //             console.log(files)
@@ -73,25 +76,9 @@ export class FeedsPage {
     *     function fires then page is loaded
     */
     ionViewDidLoad() {
-      console.log('ionViewDidLoad @ FeedsPage');
-      this.loadFeeds()
+        console.log('ionViewDidLoad @ FeedsPage');
+        this.feedProv.loadFeeds(this.rssURL)
     }
-
-    /**
-    *   load feeds
-    */
-    loadFeeds = () =>
-            this.fp.getFeed(this.rss)
-                        .subscribe(data=> {
-                            console.log(encodeURIComponent(this.rss))
-
-                            if( data.status === 'ok'){
-                                this.status = true
-                                this.feed = data.feed
-                                this.items = data.items
-                            }
-                        })
-
 
     /**
     *   refresh content
@@ -99,7 +86,7 @@ export class FeedsPage {
     doRefresh = (refresher:any) =>{
         console.log('Begin async operation', refresher);
 
-        this.loadFeeds()
+        this.feedProv.loadFeeds(this.rssURL)
 
         setTimeout(() => {
               console.log('Async operation has ended');
@@ -107,18 +94,18 @@ export class FeedsPage {
         }, 500);
     }
 
-    /**
-    *   Deletes feed from array
-    */
-    removeFeed = (item:any) => this.items = this.items.filter(it=> it !== item)
 
+
+    /**
+    *   Filter data
+    */
     filterItems(ev: any) {
         let val = ev.target.value;
-        let title:string
 
         if (val && val.trim() !== '') {
-            this.items = this.items.filter((item) => {
-                this.fp.cleanTitle(item.title)
+            this.feedProv.items = this.feedProv.items.filter((item) => {
+                console.log(this.feedProv.cleanTitle(item.title))
+                return this.feedProv.cleanTitle(item.title)
                         .toLowerCase()
                         .includes(val.toLowerCase())
             })
@@ -139,14 +126,21 @@ export class FeedsPage {
     /**
     *   Search for feed
     */
-    search = () => console.log('todo')
+    search = () => {
+        this.showSearchBar = !this.showSearchBar
+        console.log('showSearchBar: '+ this.showSearchBar)
+    }
 
     /**
     *
     */
     itemClicked = (item) => console.log(`item ${item} clicked`)
 
-
+    // moveToPage() {
+    //     this.navCtrl.push("MyPage", {
+    //         "data": items
+    //     })
+    // }
 
 
 }
