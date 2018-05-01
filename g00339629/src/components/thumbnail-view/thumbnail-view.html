@@ -1,25 +1,25 @@
 <ion-list>
     <ion-item-sliding *ngFor="let item of items">
 
-       <ion-item (click)="itemClicked(item)">
+       <ion-item (click)="viewAct.itemClicked(item)">
            <ion-thumbnail item-start >
                <img src={{item.thumbnail}} />
            </ion-thumbnail>
 
-           <h2>{{view.cleanTitle(item.title)}}</h2>
+           <h2>{{viewAct.cleanTitle(item.title)}}</h2>
            <p>{{item.pubDate}}</p>
-           <p *ngIf="view.getRating(item.content) > 0">IMDB: {{view.getRating(item.content)}}</p>
+           <p *ngIf="viewAct.getRating(item.content) > 0">IMDB: {{viewAct.getRating(item.content)}}</p>
 
        </ion-item>
 
        <ion-item-options side="left">
-           <button ion-button color="danger" (click)="feeds.removeFeed(item)">
+           <button ion-button color="danger" (click)="removeFeed(item)">
                <ion-icon name="trash"></ion-icon>
                Remove
            </button>
        </ion-item-options>
        <ion-item-options side="right">
-           <button ion-button color="secondary">
+           <button ion-button color="secondary" (click)="userFeed.saveUserFeed(item)">
                <ion-icon name="folder"></ion-icon>
                Save
            </button>

@@ -41,9 +41,16 @@
 
     <!-- Views -->
     <div [ngSwitch]="view.viewType">
-        <card-view *ngSwitchCase="'Cards'" [items]='feedProv.items'></card-view>
-        <thumbnail-view *ngSwitchCase="'Thumbnails'" [items]='feedProv.items'></thumbnail-view>
-        <p *ngSwitchDefault>Default: {{view.viewType}} <br />status: {{status}}</p>
+        <!-- <h5>{{userFeeds.userFeeds ? true : false}}</h5> -->
+        <div *ngSwitchCase="'Cards'">
+            <card-view [items]='feedProv.items'></card-view>
+            <card-view *ngIf="userFeeds.userFeeds" [items]='userFeeds.userFeeds'></card-view>
+        </div>
+        <div *ngSwitchCase="'Thumbnails'">
+            <thumbnail-view [items]='feedProv.items'></thumbnail-view>
+            <thumbnail-view *ngIf="userFeeds.userFeeds" [items]='userFeeds.userFeeds'></thumbnail-view>
+        </div>
+        <!-- <p *ngSwitchDefault>Default: {{view.viewType}} <br />status: {{status}}</p> -->
     </div>
 
     <!-- Refresh functionality -->

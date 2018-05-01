@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewActionProvider } from '../../providers/view-action/view-action';
 import { FeedsProvider } from '../../providers/feeds/feeds';
+import { UserFeedsProvider } from '../../providers/user-feeds/user-feeds';
 
 @Component({
     selector: 'thumbnail-view'
@@ -12,11 +13,20 @@ export class ThumbnailViewComponent {
     text: string;
 
     constructor(
-        private view:ViewActionProvider
+        private viewAct:ViewActionProvider
         , private feeds: FeedsProvider
+        , private userFeed: UserFeedsProvider
     ) {
         console.log('Hello ThumbnailViewComponent Component');
         this.text = 'Hello World';
+    }
+
+    /**
+    *   Deletes feed from array
+    */
+    removeFeed = (item:any) => {
+        this.feeds.removeFeed(item)
+        this.userFeed.removeFeed(item)
     }
 
 }

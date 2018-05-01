@@ -6,6 +6,7 @@ import { File } from '@ionic-native/file';
 import { FeedsProvider } from '../../providers/feeds/feeds'
 import { ViewActionProvider } from '../../providers/view-action/view-action';
 import { ViewTypeProvider } from '../../providers/view-type/view-type';
+import { UserFeedsProvider } from '../../providers/user-feeds/user-feeds';
 
 
 @IonicPage()
@@ -46,6 +47,7 @@ export class FeedsPage {
             , private view: ViewTypeProvider
             , public popoverCtrl: PopoverController
             , private file: File
+            , private userFeeds: UserFeedsProvider
     ){
         console.log('hello FeedsPage');
 
@@ -94,8 +96,6 @@ export class FeedsPage {
         }, 500);
     }
 
-
-
     /**
     *   Filter data
     */
@@ -131,10 +131,6 @@ export class FeedsPage {
         console.log('showSearchBar: '+ this.showSearchBar)
     }
 
-    /**
-    *
-    */
-    itemClicked = (item) => console.log(`item ${item} clicked`)
 
     // moveToPage() {
     //     this.navCtrl.push("MyPage", {
