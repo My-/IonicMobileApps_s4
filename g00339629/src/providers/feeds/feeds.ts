@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
+// import { UserFeedsProvider } from '../user-feeds/user-feeds';
 
 // https://stackoverflow.com/questions/44377230/using-javascript-in-ionic-2
 // https://www.npmjs.com/package/rss-to-json
@@ -19,13 +21,24 @@ export class FeedsProvider {
     private order_dir = 'order_dir='     // order direction 'desc' or 'asc' (default 'desc')
     private count = 'count='             // Count of feed items to return, default is 10 .
 
-    // RSS status
+    /**
+    * RSS status. If ok feed is ready
+    */
     status:boolean = false
+    /**
+    *   Feed suplier data
+    */
     feed = {}
+    /**
+    *   RSS feeds
+    */
     items:any[] = []
+
 
     constructor(
         public http: HttpClient
+        , public storage: Storage
+        // , public userFeeds: UserFeedsProvider
     ){
         console.log('Hello FeedsProvider Provider');
     }
@@ -80,8 +93,7 @@ export class FeedsProvider {
     */
     loadFeeds = (rssURL:string) =>
             this.getFeed(rssURL).subscribe(data=> {
-                    console.log(encodeURIComponent(rssURL))
-
+                    console.log('encoded url : '+ encodeURIComponent(rssURL))
                     if( data.status === 'ok'){
                         this.status = true
                         this.feed = data.feed
