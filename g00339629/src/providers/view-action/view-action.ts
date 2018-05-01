@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 @Injectable()
 export class ViewActionProvider {
 
-    constructor(){
+    constructor(
+        private iab: InAppBrowser
+    ){
         console.log('Hello ViewActionProvider Provider');
     }
 
@@ -41,6 +45,25 @@ export class ViewActionProvider {
             return rating
         }
         return 0
+    }
+
+    /**
+    *
+    */
+    itemClicked =(item)=> {
+        console.log(`item ${item.title} clicked`)
+
+        const url = item.link
+        const browser = this.iab.create(url);
+
+        // browser.executeScript(...);
+        // browser.insertCSS(...);
+
+        // browser.on('loadstop').subscribe(event => {
+        //    browser.insertCSS({ code: "body{color: red;" });
+        // });
+
+        browser.close();
     }
 
 

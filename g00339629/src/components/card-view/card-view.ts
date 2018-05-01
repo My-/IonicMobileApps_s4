@@ -14,10 +14,15 @@ export class CardViewComponent {
     // text: string;
 
     constructor(
-        private view:ViewActionProvider
+        private viewAct:ViewActionProvider
     ){
         console.log('Hello CardViewComponent Component');
         // this.text = 'CardViewComponent';
     }
+
+    /**
+    *   Function to handle user click on individual feed
+    */
+    itemClicked =(item:any)=> this.viewAct.itemClicked(item)
 
 }

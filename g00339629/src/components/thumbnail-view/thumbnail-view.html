@@ -1,7 +1,7 @@
 <ion-list>
     <ion-item-sliding *ngFor="let item of items">
 
-       <ion-item (click)="viewAct.itemClicked(item)">
+       <ion-item (click)="itemClicked(item)">
            <ion-thumbnail item-start >
                <img src={{item.thumbnail}} />
            </ion-thumbnail>

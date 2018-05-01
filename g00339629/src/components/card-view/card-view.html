@@ -1,20 +1,22 @@
 
 <ion-card *ngFor="let item of items">
 
-    <img src={{item.thumbnail}} />
+    <div (click)="itemClicked(item)">        
+        <img src={{item.thumbnail}} />
 
-    <ion-card-content>
-        <ion-card-title>{{view.cleanTitle(item.title)}}</ion-card-title>
-    </ion-card-content>
+        <ion-card-content>
+            <ion-card-title>{{viewAct.cleanTitle(item.title)}}</ion-card-title>
+        </ion-card-content>
+    </div>
 
     <ion-item>
         <ion-icon name='time' item-start style="color: #79745d"></ion-icon>
         {{item.pubDate}}
     </ion-item>
 
-    <ion-item *ngIf="view.getRating(item.content) > 0">
+    <ion-item *ngIf="viewAct.getRating(item.content) > 0">
         <ion-icon name='ios-thermometer-outline' item-start style="color: #79745d"></ion-icon>
-        {{view.getRating(item.content)}}
+        {{viewAct.getRating(item.content)}}
     </ion-item>
 
 </ion-card>

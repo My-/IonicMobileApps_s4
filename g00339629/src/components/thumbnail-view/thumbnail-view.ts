@@ -29,4 +29,9 @@ export class ThumbnailViewComponent {
         this.userFeed.removeFeed(item)
     }
 
+    /**
+    *   Function to handle user click on individual feed
+    */
+    itemClicked =(item:any)=> this.viewAct.itemClicked(item)
+
 }
