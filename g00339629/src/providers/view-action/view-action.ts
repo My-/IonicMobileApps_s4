@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -7,6 +8,7 @@ export class ViewActionProvider {
 
     constructor(
         private iab: InAppBrowser
+        , public alertCtrl: AlertController
     ){
         console.log('Hello ViewActionProvider Provider');
     }
@@ -48,12 +50,14 @@ export class ViewActionProvider {
     }
 
     /**
-    *
+    *   function fires then feed is clicked in any view (card/thumbnail)
     */
-    itemClicked =(item)=> {
-        console.log(`item ${item.title} clicked`)
+    itemClicked =(item:any)=> this.showGoToBrowserAlert(item)
 
-        const url = item.link
+    /**
+    *   Opens in browser (native)
+    */
+    openInBrowser =(url:string)=> {
         const browser = this.iab.create(url);
 
         // browser.executeScript(...);
@@ -66,5 +70,25 @@ export class ViewActionProvider {
         browser.close();
     }
 
+    /**
+    *   Go to browser alert
+    */
+    showGoToBrowserAlert =(item:any)=> {
+        let alert = this.alertCtrl.create({
+            title: 'Go to source!',
+            message: 'Do you want open feeds link in browser? ',
+            buttons: [
+                {
+                    text: 'OK',
+                    handler: () => this.openInBrowser(item.link)
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: it => console.log('Caceled')
+                }
+            ]
+        });
 
+        alert.present();
+    }
 }
