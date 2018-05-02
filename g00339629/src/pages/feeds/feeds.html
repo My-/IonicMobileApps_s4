@@ -36,12 +36,14 @@
             <!-- feeds from url -->
             <card-view [items]='feedProv.items'></card-view>
             <!-- previously saved feeds -->
+            <h5>Saved feeds</h5>
             <card-view *ngIf="userFeeds.userFeeds" [items]='userFeeds.userFeeds'></card-view>
         </div>
         <div *ngSwitchCase="'Thumbnails'">
             <!-- feeds from url -->
             <thumbnail-view [items]='feedProv.items'></thumbnail-view>
             <!-- previously saved feeds -->
+            <h5>Saved feeds</h5>
             <thumbnail-view *ngIf="userFeeds.userFeeds" [items]='userFeeds.userFeeds'></thumbnail-view>
         </div>
         <!-- <p *ngSwitchDefault>Default: {{view.viewType}} <br />status: {{status}}</p> -->
