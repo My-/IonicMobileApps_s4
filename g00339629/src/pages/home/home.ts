@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { Flashlight } from '@ionic-native/flashlight';
 
@@ -15,16 +17,50 @@ export class HomePage {
     constructor(
         public navCtrl: NavController
         , public navParams: NavParams
+        , public alertCtrl: AlertController
+        , private toastCtrl: ToastController
         , private flashlight: Flashlight
     ) {
         this.flashState = false
     }
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad HomePage');
+    ionViewDidLoad =()=> {
+        console.log('ionViewDidLoad HomePage')
+        this.showToast("Sorry for ugliness. I'm not Web Designer", 'top')
     }
 
-    navigateToCountingGamePage = () => console.log('todo counting game')
+    /**
+    *   Opens counting game page (unfinished)
+    */
+    navigateToCountingGamePage =()=> this.notDoneYet()
+
+    /**
+    *   Shows not don yeat messages
+    */
+    notDoneYet =()=> this.alertCtrl.create({
+        title: 'Sorry, not done yet!',
+        subTitle: 'Due lack of time is not finished',
+        buttons: [{
+            text: 'Yes, I do understand',
+            handler: ()=> this.showToast('Thank you for understanding', 'middle')
+        },{
+            text: 'No, I want it!',
+            handler: ()=> {
+                this.showToast('You are mean', 'top')
+                this.showToast('You are very mean', 'middle')
+                this.showToast('You are very, very, very mean :(', 'bottom')
+            }
+        }]
+    }).present()
+
+    /**
+    *   shows toast mesage
+    */
+    showToast =(message:string, position:string):Promise<any>=> this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: position
+    }).present()
 
     /**
     *   Go to feed page
@@ -39,6 +75,9 @@ export class HomePage {
         this.flashState = !this.flashState
     }
 
-    navigateToWeatherPage = () => console.log('todo weather')
+    /**
+    *   Show weather
+    */
+    navigateToWeatherPage = () => this.notDoneYet()
 
-    }
+}
