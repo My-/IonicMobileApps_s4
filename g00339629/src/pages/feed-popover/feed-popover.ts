@@ -7,6 +7,10 @@ import { ViewTypeProvider } from '../../providers/view-type/view-type';
     selector: 'page-feed-popover',
     templateUrl: 'feed-popover.html',
 })
+
+/**
+*   Feed popover page is settings page
+*/
 export class FeedPopoverPage {
 
     /**
@@ -32,5 +36,5 @@ export class FeedPopoverPage {
         this.view.viewType = data
         console.log('received data: '+ this.view.viewType)
     }
-    
+
 }

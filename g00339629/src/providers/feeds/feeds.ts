@@ -7,6 +7,9 @@ import { Vibration } from '@ionic-native/vibration';
 
 
 @Injectable()
+/**
+*   Responsibe for providing feeds
+*/
 export class FeedsProvider {
 
     private apiURL:string = "https://api.rss2json.com/v1/api.json"

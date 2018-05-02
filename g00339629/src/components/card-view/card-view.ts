@@ -8,6 +8,10 @@ import { ViewActionProvider } from '../../providers/view-action/view-action';
     , templateUrl: 'card-view.html'
     , inputs: ['items']
 })
+
+/**
+*   Card view component shows given 'items' array in car view
+*/
 export class CardViewComponent {
     /**
     *   items - feed array

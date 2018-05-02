@@ -7,6 +7,9 @@ export class ViewActionProvider {
 
     rssURL:string
 
+    /**
+    *   View related actions
+    */
     constructor(
         private iab: InAppBrowser
         , public alertCtrl: AlertController
@@ -16,7 +19,7 @@ export class ViewActionProvider {
 
 
     /**
-    *   cleans title
+    *   cleans title ( takes text between '/' and ')' )
     */
     cleanTitle = (title:string):string => {
         let start = title.indexOf('/')
@@ -32,7 +35,7 @@ export class ViewActionProvider {
     }
 
     /**
-    *   get IMBD rating
+    *   get IMBD rating from given string (title)
     */
     getRating = (str:string):number => {
         let start = str.indexOf('IMDB')

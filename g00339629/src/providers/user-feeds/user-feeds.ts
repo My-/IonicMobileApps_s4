@@ -4,6 +4,10 @@ import { Storage } from '@ionic/storage';
 
 
 @Injectable()
+
+/**
+*   Provider to handel saved feeds
+*/
 export class UserFeedsProvider {
 
     /**

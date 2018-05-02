@@ -11,6 +11,10 @@ import { UserFeedsProvider } from '../../providers/user-feeds/user-feeds';
     selector: 'page-feeds',
     templateUrl: 'feeds.html',
 })
+
+/**
+*   It's feed main page
+*/
 export class FeedsPage {
     /**
     *   if true shows search bar
