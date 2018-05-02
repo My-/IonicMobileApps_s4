@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, PopoverController } from 'ionic-angular';
+import { IonicPage, PopoverController, AlertController } from 'ionic-angular';
 
 import { File } from '@ionic-native/file';
 
@@ -23,18 +23,18 @@ export class FeedsPage {
     // feed = {}
     // items:any[] = []
 
-    /**
-    *    url for testing
-    */
-    url =[
-        'http://epidemz.co/filmy/rss.xml'
-        , 'http://epidemz.co/serial/rss.xml'
-        , 'http://epidemz.co/muzyka/rss.xml'
-        , 'http://feeds.bbci.co.uk/news/world/europe/rss.xml'
-        , 'http://feeds.reuters.com/reuters/technologyNews'
-    ]
-
-    rssURL = this.url[0]
+    // /**
+    // *    url for testing
+    // */
+    // url =[
+    //     'http://epidemz.co/filmy/rss.xml'
+    //     , 'http://epidemz.co/serial/rss.xml'
+    //     , 'http://epidemz.co/muzyka/rss.xml'
+    //     , 'http://feeds.bbci.co.uk/news/world/europe/rss.xml'
+    //     , 'http://feeds.reuters.com/reuters/technologyNews'
+    // ]
+    //
+    // rssURL = this.url[0]
     showSearchBar:boolean = false
 
     /**
@@ -45,9 +45,11 @@ export class FeedsPage {
     constructor(
             private feedProv:FeedsProvider
             , private view: ViewTypeProvider
+            , private viewAct: ViewActionProvider
             , public popoverCtrl: PopoverController
             , private file: File
             , private userFeeds: UserFeedsProvider
+            , public alertCtrl: AlertController
     ){
         console.log('hello FeedsPage');
 
@@ -79,7 +81,7 @@ export class FeedsPage {
     */
     ionViewDidLoad() {
         console.log('ionViewDidLoad @ FeedsPage');
-        this.feedProv.loadFeeds(this.rssURL)
+        this.feedProv.loadFeeds()
     }
 
     /**
@@ -88,7 +90,7 @@ export class FeedsPage {
     doRefresh = (refresher:any) =>{
         console.log('Begin async operation', refresher);
 
-        this.feedProv.loadFeeds(this.rssURL)
+        this.feedProv.loadFeeds()
 
         setTimeout(() => {
               console.log('Async operation has ended');
@@ -129,6 +131,50 @@ export class FeedsPage {
     search = () => {
         this.showSearchBar = !this.showSearchBar
         console.log('showSearchBar: '+ this.showSearchBar)
+    }
+
+    /**
+    *   Fires then feed title clicked.
+    */
+    feedTitleClicked =(ev:any)=> {
+        this.showEnterFeederAlert()
+    }
+
+    // changeURL =(url:string)=>{
+    //     this.feedProv.setRssUrl(url)
+    //     this.feedProv.loadFeeds(this.feedProv.rssURL)
+    // }
+
+    /**
+    *
+    */
+    showEnterFeederAlert =()=> {
+        let alert = this.alertCtrl.create({
+            title: 'Change RSS feed source',
+            subTitle: 'Enter new RSS feed source',
+            inputs: [
+                {
+                    name: 'rssURL',
+                    placeholder: 'Link'
+                }
+            ],
+            buttons: [
+                {
+                    text: 'OK',
+                    handler: it => {
+                        console.log('Entered url: '+ it.rssURL)
+                        this.feedProv.changeFeeder(it.rssURL)
+                        this.feedProv.loadFeeds()
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => console.log('Caceled')
+                }
+            ]
+        })
+
+        alert.present()
     }
 
 

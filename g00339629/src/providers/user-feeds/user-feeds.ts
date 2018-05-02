@@ -24,7 +24,7 @@ export class UserFeedsProvider {
     /**
     *   Get user saved feeds as array
     */
-    get = ():any[] => this.userFeeds
+    get = ():any[] => this.userFeeds    
 
     /**
     *   Deletes feed from array
@@ -40,7 +40,7 @@ export class UserFeedsProvider {
     saveUserFeed = (feed?:any) => {
         if( feed ){
             console.log('got: '+ feed)
-            if( !this.userFeeds ){ this.userFeeds = [] }            
+            if( !this.userFeeds ){ this.userFeeds = [] }
             this.userFeeds.push(feed)
         }
 

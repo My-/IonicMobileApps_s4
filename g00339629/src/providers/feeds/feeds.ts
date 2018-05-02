@@ -34,6 +34,23 @@ export class FeedsProvider {
     */
     items:any[] = []
 
+    /**
+    *    url for testing
+    */
+    url = [
+         'http://feeds.bbci.co.uk/news/world/europe/rss.xml'
+        , 'http://feeds.reuters.com/reuters/technologyNews'
+        , 'http://epidemz.co/filmy/rss.xml'
+        , 'http://epidemz.co/serial/rss.xml'
+        , 'http://epidemz.co/muzyka/rss.xml'
+    ]
+    /**
+    *   RSS fees url
+    */
+    // rssURL:Promise<string>
+    rssURL:string
+
+    private feederUrlKey = 'lastFeedProvider'
 
     constructor(
         public http: HttpClient
@@ -41,9 +58,24 @@ export class FeedsProvider {
         // , public userFeeds: UserFeedsProvider
     ){
         console.log('Hello FeedsProvider Provider');
+        this.loadFeeder(this.url[0])
+                .then(()=> this.loadFeeds())
+
     }
 
-    // https://stackoverflow.com/a/332888/5322506
+    /**
+    *   Sets RSS url
+    */
+    setRssUrl =(newUrl:string)=> {
+        this.rssURL =  newUrl
+        console.log('New RSS url: '+ this.rssURL)
+    }
+
+    /**
+    *   Get feeds from net
+    *
+    *   https://stackoverflow.com/a/332888/5322506
+    */
     getFeed = (rssURL:string):Observable<any> =>
             this.http.get(`${this.apiURL}?${this.apiKey}&${this.rss_url}${encodeURIComponent(rssURL)}`
             +`&${this.count}13`)
@@ -91,17 +123,32 @@ export class FeedsProvider {
     /**
     *   load feeds
     */
-    loadFeeds = (rssURL:string) =>
-            this.getFeed(rssURL).subscribe(data=> {
-                    console.log('encoded url : '+ encodeURIComponent(rssURL))
-                    if( data.status === 'ok'){
-                        this.status = true
-                        this.feed = data.feed
-                        this.items = data.items
-                    }
-            })
+    loadFeeds =()=> {
+        this.getFeed(this.rssURL).subscribe(data=> {
+            console.log('subscribe feeds from: '+ this.rssURL)
+            if( data.status === 'ok'){
+                this.status = true
+                this.feed = data.feed
+                this.items = data.items
+            }
+        })
+    }
 
+    changeFeeder =(rssURL:string)=>{
+        this.rssURL = rssURL
+        this.saveFeeder();
+    }
 
+    saveFeeder =()=>{
+        this.storage.set(this.feederUrlKey, this.rssURL)
+                .then(it=> console.log('saved feed: ', it))
+                .catch(it=> console.log('error: ', it))
+    }
 
-
+    loadFeeder =(defUrl:string):Promise<any>=> {
+        return this.storage.get(this.feederUrlKey)
+                .then(it=> this.rssURL = it ? it : defUrl)
+                .catch(it=> console.log('error: cant load saved url:', it))
+                .then(()=> console.log('loaded rss url: ', this.rssURL))
+    }
 }

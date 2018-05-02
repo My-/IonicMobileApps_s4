@@ -1,16 +1,4 @@
-<!--
-  Generated template for the FeedsPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!-- <ion-header>
-
-  <ion-navbar>
-    <ion-title>feeds</ion-title>
-  </ion-navbar>
-
-</ion-header> -->
 <ion-header>
   <ion-toolbar>
 
@@ -20,7 +8,7 @@
       </button>
     </ion-buttons>
 
-    <ion-title>{{feedProv.feed.title}}</ion-title>
+    <ion-title (click)="feedTitleClicked($event)">{{feedProv.feed.title}}</ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="moreMenu($event)">
@@ -38,10 +26,10 @@
 
 <!-- Main content -->
 <ion-content padding >
+    <h5>{{feedProv.items.length}} - {{feedProv.status}}</h5>
 
     <!-- Views -->
     <div [ngSwitch]="view.viewType">
-        <!-- <h5>{{userFeeds.userFeeds ? true : false}}</h5> -->
         <div *ngSwitchCase="'Cards'">
             <card-view [items]='feedProv.items'></card-view>
             <card-view *ngIf="userFeeds.userFeeds" [items]='userFeeds.userFeeds'></card-view>
