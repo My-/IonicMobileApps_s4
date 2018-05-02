@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
+import { Vibration } from '@ionic-native/vibration';
 // import { UserFeedsProvider } from '../user-feeds/user-feeds';
 
 // https://stackoverflow.com/questions/44377230/using-javascript-in-ionic-2
@@ -55,7 +56,7 @@ export class FeedsProvider {
     constructor(
         public http: HttpClient
         , public storage: Storage
-        // , public userFeeds: UserFeedsProvider
+        , private vibration: Vibration
     ){
         console.log('Hello FeedsProvider Provider');
         this.loadFeeder(this.url[0])
@@ -131,7 +132,7 @@ export class FeedsProvider {
                 this.feed = data.feed
                 this.items = data.items
             }
-        })
+        }, null, ()=> this.vibration.vibrate(200))  // vibrate then load finished
     }
 
     changeFeeder =(rssURL:string)=>{

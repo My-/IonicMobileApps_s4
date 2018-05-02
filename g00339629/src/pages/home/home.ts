@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Flashlight } from '@ionic-native/flashlight';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -8,16 +10,35 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    private flashState:boolean
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-  }
+    constructor(
+        public navCtrl: NavController
+        , public navParams: NavParams
+        , private flashlight: Flashlight
+    ) {
+        this.flashState = false
+    }
 
-  navigateToCountingGamePage = () => console.log('todo counting game')
-  navigateToFeedsPage = () => this.navCtrl.push('FeedsPage')
-  toggleLight = () => console.log('todo tougle light')
-  navigateToWeatherPage = () => console.log('todo weather')
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad HomePage');
+    }
 
-}
+    navigateToCountingGamePage = () => console.log('todo counting game')
+
+    /**
+    *   Go to feed page
+    */
+    navigateToFeedsPage =()=> this.navCtrl.push('FeedsPage')
+
+    /**
+    *   turns on/off flash light
+    */
+    toggleLight =()=> {
+        this.flashState ? this.flashlight.switchOn() : this.flashlight.switchOff();
+        this.flashState = !this.flashState
+    }
+
+    navigateToWeatherPage = () => console.log('todo weather')
+
+    }
