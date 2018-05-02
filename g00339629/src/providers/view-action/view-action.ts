@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
-
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { FeedsProvider } from '../feeds/feeds';
 
@@ -61,40 +60,26 @@ export class ViewActionProvider {
     /**
     *   Opens in browser (native)
     */
-    openInBrowser =(url:string)=> {
-        const browser = this.iab.create(url);
-
-        // browser.executeScript(...);
-        // browser.insertCSS(...);
-
-        // browser.on('loadstop').subscribe(event => {
-        //    browser.insertCSS({ code: "body{color: red;" });
-        // });
-
-        browser.close();
-    }
+    openInBrowser =(url:string)=> this.iab.create(url).close()
 
     /**
     *   Go to browser alert
     */
-    showGoToBrowserAlert =(item:any)=> {
-        let alert = this.alertCtrl.create({
-            title: 'Go to source!',
-            message: 'Do you want open feeds link in browser? ',
-            buttons: [
-                {
-                    text: 'OK',
-                    handler: () => this.openInBrowser(item.link)
-                }, {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: it => console.log('Caceled')
-                }
-            ]
-        })
+    showGoToBrowserAlert =(item:any)=> this.alertCtrl.create({
+        title: 'Go to source!',
+        message: 'Do you want open feeds link in browser? ',
+        buttons: [
+            {
+                text: 'OK',
+                handler: () => this.openInBrowser(item.link)
+            }, {
+                text: 'Cancel',
+                role: 'cancel',
+                handler: it => console.log('Caceled')
+            }
+        ]
+    }).present()
 
-        alert.present()
-    }
 
-    
+
 }

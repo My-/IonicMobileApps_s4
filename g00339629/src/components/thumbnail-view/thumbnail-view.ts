@@ -10,15 +10,12 @@ import { UserFeedsProvider } from '../../providers/user-feeds/user-feeds';
 })
 export class ThumbnailViewComponent {
 
-    text: string;
-
     constructor(
         private viewAct:ViewActionProvider
         , private feeds: FeedsProvider
         , private userFeed: UserFeedsProvider
     ) {
         console.log('Hello ThumbnailViewComponent Component');
-        this.text = 'Hello World';
     }
 
     /**

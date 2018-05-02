@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { Storage } from '@ionic/storage';
 
 
@@ -24,7 +23,7 @@ export class UserFeedsProvider {
     /**
     *   Get user saved feeds as array
     */
-    get = ():any[] => this.userFeeds    
+    get = ():any[] => this.userFeeds
 
     /**
     *   Deletes feed from array
@@ -52,11 +51,10 @@ export class UserFeedsProvider {
     /**
     *   Loads previosly saved feeds from storage
     */
-    loadSavedFeeds(){
-        this.storage.get(this.userFeedsKey)
-                .then(it => this.userFeeds = it)       // load from storage
-                .catch(err=> console.error('Error then loading: '+ err))
-                .then(() => console.log(`loaded ${this.userFeeds ? this.userFeeds.length : 0} saved items`))
-    }
+    loadSavedFeeds =()=> this.storage.get(this.userFeedsKey)
+            .then(it => this.userFeeds = it)       // load from storage
+            .catch(err=> console.error('Error then loading: '+ err))
+            .then(() => console.log(`loaded ${this.userFeeds ? this.userFeeds.length : 0} saved items`))
+
 
 }

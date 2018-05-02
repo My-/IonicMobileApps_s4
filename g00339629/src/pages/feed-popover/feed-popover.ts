@@ -1,6 +1,5 @@
-import { Component,Input, Directive } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { Component } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
 import { ViewTypeProvider } from '../../providers/view-type/view-type';
 
 @IonicPage()
@@ -8,9 +7,6 @@ import { ViewTypeProvider } from '../../providers/view-type/view-type';
     selector: 'page-feed-popover',
     templateUrl: 'feed-popover.html',
 })
-// @Directive({
-//     selector: '[(rssView)]'
-// })
 export class FeedPopoverPage {
 
     /**
@@ -19,23 +15,10 @@ export class FeedPopoverPage {
     public viewType:string
 
     constructor(
-        // public navCtrl: NavController
-        // , public navParams: NavParams
-        // , private storage:Storage
-        // , public viewCtrl: ViewController
-        // ,
         private view: ViewTypeProvider
     ) {
         this.viewType = this.view.viewType
     }
-
-    // ionViewDidLoad() {
-    //     console.log('ionViewDidLoad FeedPopoverPage');
-    // }
-    //
-    // ionViewWillEnter = () => {
-    //     console.log('ionViewWillEnter() @FeedPopoverPage')
-    // }
 
     /**
     *   Event fires then leaving the page
@@ -49,7 +32,5 @@ export class FeedPopoverPage {
         this.view.viewType = data
         console.log('received data: '+ this.view.viewType)
     }
-
-
-
+    
 }

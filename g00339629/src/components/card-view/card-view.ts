@@ -9,15 +9,15 @@ import { ViewActionProvider } from '../../providers/view-action/view-action';
     , inputs: ['items']
 })
 export class CardViewComponent {
+    /**
+    *   items - feed array
+    */
     items:any[]
-
-    // text: string;
 
     constructor(
         private viewAct:ViewActionProvider
     ){
         console.log('Hello CardViewComponent Component');
-        // this.text = 'CardViewComponent';
     }
 
     /**

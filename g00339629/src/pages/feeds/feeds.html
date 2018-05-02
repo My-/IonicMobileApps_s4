@@ -3,7 +3,7 @@
   <ion-toolbar>
 
     <ion-buttons start>
-      <button ion-button icon-only color="royal" (click)="search()">
+      <button ion-button icon-only color="royal" (click)="togleSearch()">
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
@@ -26,16 +26,22 @@
 
 <!-- Main content -->
 <ion-content padding >
-    <h5>{{feedProv.items.length}} - {{feedProv.status}}</h5>
+
+    <!-- for debuging -->
+    <!-- <h5>{{feedProv.items.length}} - {{feedProv.status}}</h5> -->
 
     <!-- Views -->
     <div [ngSwitch]="view.viewType">
         <div *ngSwitchCase="'Cards'">
+            <!-- feeds from url -->
             <card-view [items]='feedProv.items'></card-view>
+            <!-- previously saved feeds -->
             <card-view *ngIf="userFeeds.userFeeds" [items]='userFeeds.userFeeds'></card-view>
         </div>
         <div *ngSwitchCase="'Thumbnails'">
+            <!-- feeds from url -->
             <thumbnail-view [items]='feedProv.items'></thumbnail-view>
+            <!-- previously saved feeds -->
             <thumbnail-view *ngIf="userFeeds.userFeeds" [items]='userFeeds.userFeeds'></thumbnail-view>
         </div>
         <!-- <p *ngSwitchDefault>Default: {{view.viewType}} <br />status: {{status}}</p> -->
