@@ -33,7 +33,7 @@ export class FeedsProvider {
     */
     url = [
          'http://feeds.bbci.co.uk/news/world/europe/rss.xml'
-        , 'http://feeds.reuters.com/reuters/technologyNews'
+        , 'http://feeds.feedburner.com/WWFStories'
     ]
     /**
     *   RSS fees url
