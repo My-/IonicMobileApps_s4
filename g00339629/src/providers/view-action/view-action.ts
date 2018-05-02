@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { FeedsProvider } from '../feeds/feeds';
 
 @Injectable()
 export class ViewActionProvider {
@@ -11,7 +10,6 @@ export class ViewActionProvider {
     constructor(
         private iab: InAppBrowser
         , public alertCtrl: AlertController
-        // , public feedProv: FeedsProvider
     ){
         console.log('Hello ViewActionProvider Provider');
     }

@@ -13,8 +13,6 @@ export class FeedsProvider {
     private apiKey:string = "72nhr3wkeukkx6pv9kz8p8cgu8doh9qbhrepco0x"
     // setings
     private rss_url = 'rss_url='        // url to be converted to JSON (must be escaped)
-    private order_by = 'order_by='      // Possible values : pubDate, author or title.
-    private order_dir = 'order_dir='    // order direction 'desc' or 'asc' (default 'desc')
     private count = 'count='            // Count of feed items to return, default is 10 .
 
     /**
@@ -70,7 +68,7 @@ export class FeedsProvider {
     *   https://stackoverflow.com/a/332888/5322506
     */
     getFeed =(rssURL:string):Observable<any>=> this.http.get(`${this.apiURL}?${this.apiKey}&${this.rss_url}${encodeURIComponent(rssURL)}`
-            +`&${this.count}13`)
+            +`&${this.count}25`)
 
     /**
     *   cleans title
