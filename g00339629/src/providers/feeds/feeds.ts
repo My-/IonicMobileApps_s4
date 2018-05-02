@@ -12,10 +12,10 @@ export class FeedsProvider {
     private apiURL:string = "https://api.rss2json.com/v1/api.json"
     private apiKey:string = "72nhr3wkeukkx6pv9kz8p8cgu8doh9qbhrepco0x"
     // setings
-    private rss_url = 'rss_url='        // url to be converted to JSON (must be escaped)
-    private order_by = 'order_by='      // Possible values : pubDate, author or title.
-    private order_dir = 'order_dir='    // order direction 'desc' or 'asc' (default 'desc')
-    private count = 'count='            // Count of feed items to return, default is 10 .
+    private rss_url = ""        // url to be converted to JSON (must be escaped)
+    private order_by = ""      // Possible values : pubDate, author or title.
+    private order_dir = ""    // order direction 'desc' or 'asc' (default 'desc')
+    private count = ""           // Count of feed items to return, default is 10 .
 
     /**
     * RSS status. If ok feed is ready
@@ -40,7 +40,6 @@ export class FeedsProvider {
     /**
     *   RSS fees url
     */
-    // rssURL:Promise<string>
     rssURL:string
 
     private feederUrlKey = 'lastFeedProvider'
@@ -69,8 +68,20 @@ export class FeedsProvider {
     *
     *   https://stackoverflow.com/a/332888/5322506
     */
-    getFeed =(rssURL:string):Observable<any>=> this.http.get(`${this.apiURL}?${this.apiKey}&${this.rss_url}${encodeURIComponent(rssURL)}`
-            +`&${this.count}13`)
+    getFeed =(rssURL:string):Observable<any>=> {
+        let url =
+                // `${this.apiURL}?`
+                // + `api_key=${this.apiKey}`
+                // + `&rss_url=${encodeURIComponent(rssURL)}`
+                // + `&order_by=${this.order_by}`
+                // + `&order_dir=${this.order_dir}`
+                // + `&count=${this.count}`
+                `${this.apiURL}?${this.apiKey}&${this.rss_url}${encodeURIComponent(rssURL)}`
++`&${this.count}13`
+
+        console.log('url: ', url)
+        return this.http.get(url)
+    }
 
     /**
     *   cleans title

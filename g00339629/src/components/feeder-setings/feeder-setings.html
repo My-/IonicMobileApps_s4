@@ -1,0 +1,31 @@
+<div class="outer-content">
+
+    <ion-list>
+        <!-- Order by -->
+        <ion-item>
+            <ion-label>Order</ion-label>
+            <ion-select [(ngModel)]="feedProv.order_by">
+                <ion-option value="pubDate">Date</ion-option>
+                <ion-option value="author">Author</ion-option>
+                <ion-option value="title">Title</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <!-- Order direction -->
+        <ion-item>
+            <ion-icon name="plane" item-start color="secondary"></ion-icon>
+            <ion-label>Decending</ion-label>
+            <ion-toggle color="secondary" [(ngModel)]="feedProv.order_dir"></ion-toggle>
+        </ion-item>
+
+        <!-- Feed to return -->
+        <ion-item>
+            <ion-range min="5" max="50" pin="true" [(ngModel)]="feedProv.count" color="secondary">
+                <ion-label range-left>5</ion-label>
+                <ion-label range-right>50</ion-label>
+            </ion-range>
+        </ion-item>
+
+    </ion-list>
+
+</div>
