@@ -10,6 +10,10 @@ import { Flashlight } from '@ionic-native/flashlight';
   selector: 'page-home',
   templateUrl: 'home.html',
 })
+
+/**
+*   Main starting page
+*/
 export class HomePage {
 
     private flashState:boolean

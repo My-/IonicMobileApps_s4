@@ -4,6 +4,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     selector: 'menu-views'
     , templateUrl: 'menu-views.html'
 })
+
+/**
+*   Component responsible for view settings (used inside feeds popover page)
+*/
 export class MenuViewsComponent {
 
     // @reference: https://www.youtube.com/watch?v=DUe8y6QVPMk

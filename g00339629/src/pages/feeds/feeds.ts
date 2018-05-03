@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, PopoverController, AlertController } from 'ionic-angular';
 
 import { FeedsProvider } from '../../providers/feeds/feeds'
-import { ViewActionProvider } from '../../providers/view-action/view-action';
 import { ViewTypeProvider } from '../../providers/view-type/view-type';
 import { UserFeedsProvider } from '../../providers/user-feeds/user-feeds';
 
@@ -12,6 +11,10 @@ import { UserFeedsProvider } from '../../providers/user-feeds/user-feeds';
     selector: 'page-feeds',
     templateUrl: 'feeds.html',
 })
+
+/**
+*   It's feed main page
+*/
 export class FeedsPage {
     /**
     *   if true shows search bar
@@ -20,10 +23,9 @@ export class FeedsPage {
 
     constructor(
             private feedProv:FeedsProvider
-            , private view: ViewTypeProvider
-            , private viewAct: ViewActionProvider
+            , private view: ViewTypeProvider        //<-- is used inside feeds.html
             , public popoverCtrl: PopoverController
-            , private userFeeds: UserFeedsProvider
+            , private userFeeds: UserFeedsProvider  //<-- is used inside feeds.html
             , public alertCtrl: AlertController
     ){
         console.log('hello FeedsPage');

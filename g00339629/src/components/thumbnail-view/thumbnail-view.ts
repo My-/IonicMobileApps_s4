@@ -8,6 +8,10 @@ import { UserFeedsProvider } from '../../providers/user-feeds/user-feeds';
     , templateUrl: 'thumbnail-view.html'
     , inputs: ['items']
 })
+
+/**
+*   Thumbnail view component shows given 'items' array in thumbnail view
+*/
 export class ThumbnailViewComponent {
 
     constructor(

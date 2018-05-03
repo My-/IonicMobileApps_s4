@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { FeedsProvider } from '../feeds/feeds';
 
 @Injectable()
 export class ViewActionProvider {
 
     rssURL:string
 
+    /**
+    *   View related actions
+    */
     constructor(
         private iab: InAppBrowser
         , public alertCtrl: AlertController
-        // , public feedProv: FeedsProvider
     ){
         console.log('Hello ViewActionProvider Provider');
     }
 
 
     /**
-    *   cleans title
+    *   cleans title ( takes text between '/' and ')' )
     */
     cleanTitle = (title:string):string => {
         let start = title.indexOf('/')
@@ -34,7 +35,7 @@ export class ViewActionProvider {
     }
 
     /**
-    *   get IMBD rating
+    *   get IMBD rating from given string (title)
     */
     getRating = (str:string):number => {
         let start = str.indexOf('IMDB')
